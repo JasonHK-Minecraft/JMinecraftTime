@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Minecraft-RTC.iml" filepath="$PROJECT_DIR$/.idea/modules/Minecraft-RTC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/Minecraft-RTC.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/Minecraft-RTC.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/Minecraft-RTC.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/Minecraft-RTC.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/Minecraft-RTC.core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/Minecraft-RTC.core.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Minecraft-RTC.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Minecraft-RTC.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Minecraft-RTC.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Minecraft-RTC.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dev.jasonhk.mcrtc.Minecraft-RTC.main.iml" filepath="$PROJECT_DIR$/.idea/modules/dev.jasonhk.mcrtc.Minecraft-RTC.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dev.jasonhk.mcrtc.Minecraft-RTC.test.iml" filepath="$PROJECT_DIR$/.idea/modules/dev.jasonhk.mcrtc.Minecraft-RTC.test.iml" />
+    </modules>
+  </component>
+</project>
