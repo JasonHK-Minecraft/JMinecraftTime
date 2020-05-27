@@ -12,6 +12,7 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 
 import static dev.jasonhk.mcrtc.core.time.temporal.MinecraftUnit.TICKS;
 
+@SuppressWarnings("unused")
 public enum MinecraftField implements TemporalField
 {
     TICK_OF_MINUTE("TickOfMinute", FieldType.TIME_BASED, TICKS, MINUTES, ValueRange.of(0, 16)),
@@ -74,47 +75,48 @@ public enum MinecraftField implements TemporalField
     @Override
     public ValueRange range()
     {
-        return this.range;
+        return range;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public long checkValidValue(long value)
     {
-        return this.range.checkValidValue(value, this);
+        return range.checkValidValue(value, this);
     }
 
     public int checkValidIntValue(long value)
     {
-        return this.range.checkValidIntValue(value, this);
+        return range.checkValidIntValue(value, this);
     }
 
     @Override
     public boolean isDateBased()
     {
-        return (this.type == FieldType.DATE_BASED);
+        return (type == FieldType.DATE_BASED);
     }
 
     @Override
     public boolean isTimeBased()
     {
-        return (this.type == FieldType.TIME_BASED);
+        return (type == FieldType.TIME_BASED);
     }
 
     @Override
     public TemporalUnit getBaseUnit()
     {
-        return this.baseUnit;
+        return baseUnit;
     }
 
     @Override
     public TemporalUnit getRangeUnit()
     {
-        return this.rangeUnit;
+        return rangeUnit;
     }
 
     @Override
     public String toString()
     {
-        return this.name;
+        return name;
     }
 
     private enum FieldType

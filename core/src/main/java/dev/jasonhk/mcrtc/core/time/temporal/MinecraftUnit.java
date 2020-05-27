@@ -42,31 +42,31 @@ public enum MinecraftUnit implements TemporalUnit
     @Override
     public boolean isDateBased()
     {
-        return (this.type == UnitType.DATE_BASED);
+        return (type == UnitType.DATE_BASED);
     }
 
     @Override
     public boolean isTimeBased()
     {
-        return (this.type == UnitType.TIME_BASED);
+        return (type == UnitType.TIME_BASED);
     }
 
     @Override
     public boolean isDurationEstimated()
     {
-        return this.durationEstimated;
+        return durationEstimated;
     }
 
     @Override
     public Duration getDuration()
     {
-        return this.duration;
+        return duration;
     }
 
     @Override
     public String toString()
     {
-        return this.name;
+        return name;
     }
 
     private enum UnitType
