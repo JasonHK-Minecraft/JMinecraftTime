@@ -15,8 +15,6 @@ import static dev.jasonhk.mcrtc.core.time.temporal.MinecraftUnit.TICKS;
 @SuppressWarnings("unused")
 public enum MinecraftField implements TemporalField
 {
-    TICK_OF_MINUTE("TickOfMinute", FieldType.TIME_BASED, TICKS, MINUTES, ValueRange.of(0, 16)),
-    TICK_OF_HOUR("TickOfHour", FieldType.TIME_BASED, TICKS, HOURS, ValueRange.of(0, 999)),
     TICK_OF_DAY("TickOfDay", FieldType.TIME_BASED, TICKS, DAYS, ValueRange.of(0, 23_999));
 
     private final String       name;
