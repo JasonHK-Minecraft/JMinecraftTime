@@ -5,12 +5,11 @@ import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalField;
 import java.time.temporal.TemporalUnit;
 import java.time.temporal.ValueRange;
-
 import static java.time.temporal.ChronoUnit.DAYS;
 
 import static dev.jasonhk.mctime.temporal.MinecraftUnit.TICKS;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "UnusedReturnValue" })
 public enum MinecraftField implements TemporalField
 {
     TICK_OF_DAY("TickOfDay", FieldType.TIME_BASED, TICKS, DAYS, ValueRange.of(0, 23_999));
@@ -22,7 +21,12 @@ public enum MinecraftField implements TemporalField
     private final ValueRange   range;
     private final String       displayNameKey;
 
-    MinecraftField(String name, FieldType type, TemporalUnit baseUnit, TemporalUnit rangeUnit, ValueRange range)
+    MinecraftField(
+            String name,
+            FieldType type,
+            TemporalUnit baseUnit,
+            TemporalUnit rangeUnit,
+            ValueRange range)
     {
         this(name, type, baseUnit, rangeUnit, range, null);
     }
@@ -74,7 +78,6 @@ public enum MinecraftField implements TemporalField
         return range;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public long checkValidValue(long value)
     {
         return range.checkValidValue(value, this);
@@ -118,6 +121,6 @@ public enum MinecraftField implements TemporalField
     private enum FieldType
     {
         TIME_BASED,
-        DATE_BASED
+        DATE_BASED,
     }
 }
