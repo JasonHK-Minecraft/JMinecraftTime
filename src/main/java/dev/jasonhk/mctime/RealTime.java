@@ -1,42 +1,51 @@
 package dev.jasonhk.mctime;
 
-import lombok.experimental.UtilityClass;
-
-@UtilityClass
-class RealTime
+final class RealTime
 {
     /**
      * Hours per day.
      */
-    final int HOURS_PER_DAY = 24;
+    static final int HOURS_PER_DAY = 24;
 
     /**
      * Minutes per hour.
      */
-    final int MINUTES_PER_HOUR = 60;
+    static final int MINUTES_PER_HOUR = 60;
 
     /**
      * Seconds per minute.
      */
-    final int SECONDS_PER_MINUTE = 60;
+    static final int SECONDS_PER_MINUTE = 60;
 
     /**
      * Nanoseconds per second.
      */
-    final long NANOS_PER_SECOND = 1_000_000_000;
+    static final long NANOS_PER_SECOND = 1_000_000_000;
 
     /**
      * Minutes per day.
      */
-    final int MINUTES_PER_DAY = MINUTES_PER_HOUR * HOURS_PER_DAY;
+    static final int MINUTES_PER_DAY = MINUTES_PER_HOUR * HOURS_PER_DAY;
 
     /**
      * Seconds per hour.
      */
-    final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
+    static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
 
     /**
      * Seconds per day.
      */
-    final int SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
+    static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
+
+    static final long NANOS_PER_MINUTE = NANOS_PER_SECOND * SECONDS_PER_MINUTE;
+
+    static final long NANOS_PER_HOUR = NANOS_PER_MINUTE * MINUTES_PER_HOUR;
+
+    static final long NANOS_PER_DAY = NANOS_PER_HOUR * HOURS_PER_DAY;
+
+    private RealTime()
+    {
+        throw new UnsupportedOperationException(
+                "This is a utility class and cannot be instantiated.");
+    }
 }
