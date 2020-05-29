@@ -1,2 +1,2 @@
-rootProject.name = "Minecraft-RTC"
+rootProject.name = "McTime4j"
 include("core")
