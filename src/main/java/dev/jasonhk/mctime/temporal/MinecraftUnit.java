@@ -1,4 +1,4 @@
-package dev.jasonhk.mcrtc.core.time.temporal;
+package dev.jasonhk.mctime.temporal;
 
 import java.time.Duration;
 import java.time.temporal.Temporal;

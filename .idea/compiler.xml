@@ -10,8 +10,6 @@
         </processorPath>
         <module name="McTime4j.test" />
         <module name="McTime4j.main" />
-        <module name="McTime4j.core.test" />
-        <module name="McTime4j.core.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8" />

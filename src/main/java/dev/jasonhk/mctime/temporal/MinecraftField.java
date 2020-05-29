@@ -1,4 +1,4 @@
-package dev.jasonhk.mcrtc.core.time.temporal;
+package dev.jasonhk.mctime.temporal;
 
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAccessor;
@@ -7,10 +7,8 @@ import java.time.temporal.TemporalUnit;
 import java.time.temporal.ValueRange;
 
 import static java.time.temporal.ChronoUnit.DAYS;
-import static java.time.temporal.ChronoUnit.HOURS;
-import static java.time.temporal.ChronoUnit.MINUTES;
 
-import static dev.jasonhk.mcrtc.core.time.temporal.MinecraftUnit.TICKS;
+import static dev.jasonhk.mctime.temporal.MinecraftUnit.TICKS;
 
 @SuppressWarnings("unused")
 public enum MinecraftField implements TemporalField

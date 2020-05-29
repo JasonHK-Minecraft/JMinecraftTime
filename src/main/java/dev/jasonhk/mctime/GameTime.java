@@ -1,4 +1,4 @@
-package dev.jasonhk.mcrtc.core.time;
+package dev.jasonhk.mctime;
 
 import lombok.experimental.UtilityClass;
 

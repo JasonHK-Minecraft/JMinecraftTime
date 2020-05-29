@@ -3,9 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/McTime4j.iml" filepath="$PROJECT_DIR$/.idea/modules/McTime4j.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/McTime4j.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/McTime4j.core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/McTime4j.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/McTime4j.core.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/McTime4j.core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/McTime4j.core.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/McTime4j.main.iml" filepath="$PROJECT_DIR$/.idea/modules/McTime4j.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/McTime4j.test.iml" filepath="$PROJECT_DIR$/.idea/modules/McTime4j.test.iml" />
     </modules>
