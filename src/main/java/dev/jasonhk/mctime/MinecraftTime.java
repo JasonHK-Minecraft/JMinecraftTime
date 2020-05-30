@@ -13,6 +13,7 @@ import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.HashMap;
 import static java.time.temporal.ChronoField.HOUR_OF_DAY;
 import static java.time.temporal.ChronoField.MINUTE_OF_HOUR;
+import static java.time.temporal.ChronoField.NANO_OF_DAY;
 import static java.time.temporal.ChronoField.NANO_OF_SECOND;
 import static java.time.temporal.ChronoField.SECOND_OF_DAY;
 import static java.time.temporal.ChronoField.SECOND_OF_MINUTE;
@@ -26,6 +27,7 @@ import dev.jasonhk.mctime.temporal.MinecraftUnit;
 import static dev.jasonhk.mctime.RealTime.HOURS_PER_DAY;
 import static dev.jasonhk.mctime.RealTime.MINUTES_PER_DAY;
 import static dev.jasonhk.mctime.RealTime.MINUTES_PER_HOUR;
+import static dev.jasonhk.mctime.RealTime.NANOS_PER_DAY;
 import static dev.jasonhk.mctime.RealTime.NANOS_PER_HOUR;
 import static dev.jasonhk.mctime.RealTime.NANOS_PER_MINUTE;
 import static dev.jasonhk.mctime.RealTime.NANOS_PER_SECOND;
@@ -65,7 +67,8 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * Seconds per tick.
      */
     static final double SECONDS_PER_TICK
-            = (double) RealTime.MINUTES_PER_DAY / GameTime.MINUTES_PER_DAY / GameTime.TICKS_PER_SECOND;
+            = (double) RealTime.MINUTES_PER_DAY / GameTime.MINUTES_PER_DAY /
+              GameTime.TICKS_PER_SECOND;
 
     /**
      * Nanoseconds per tick.
@@ -96,7 +99,9 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
 
     static final long NANOS_PER_TICKS_PER_SECOND = (long) (TICKS_PER_SECOND * NANOS_PER_SECOND);
 
-    private static final HashMap<Integer, MinecraftTime> HOURS = new HashMap<>(24);
+    private static final long NANOS_OF_HOUR_OFFSET = HOUR_OFFSET * NANOS_PER_HOUR;
+
+    private static final HashMap<Integer, MinecraftTime> HOURS = new HashMap<>(HOURS_PER_DAY);
 
     static
     {
@@ -129,23 +134,63 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
 
     //<editor-fold desc="Static Methods">
     //<editor-fold desc="TIME CREATORS">
+
+    /**
+     * Obtains an instance of {@code MinecraftTime} from the current time of the system clock in the
+     * default time-zone.
+     * <p>
+     * This will query the {@linkplain Clock#systemDefaultZone() system clock} in the default
+     * time-zone to obtain the current time.
+     * <p>
+     * Using this method will prevent the ability to use an alternate clock for testing because the
+     * clock is hard-coded.
+     *
+     * @return The current Minecraft time using the system clock and default time-zone, not {@code null}.
+     */
     @NonNull
-    private static MinecraftTime create(int tickOfDay)
+    public static MinecraftTime now()
     {
-        return HOURS.containsKey(tickOfDay)
-               ? HOURS.get(tickOfDay)
-               : new MinecraftTime(tickOfDay);
+        return now(Clock.systemDefaultZone());
     }
 
+    /**
+     * Obtains an instance of {@code MinecraftTime} from the current time of the system clock in the
+     * specified time-zone.
+     * <p>
+     * This will query the {@linkplain Clock#system(ZoneId) system clock} to obtain the current
+     * time. Specifying the time-zone avoids dependence on the default time-zone.
+     * <p>
+     * Using this method will prevent the ability to use an alternate clock for testing because the
+     * clock is hard-coded.
+     *
+     * @param zone The zone ID to use, not {@code null}.
+     * @return The current Minecraft time using the system clock, not {@code null}.
+     */
     @NonNull
-    private static MinecraftTime create(int hour, int minute, int second, int nano)
+    public static MinecraftTime now(@NonNull ZoneId zone)
     {
-        var nanoOfDay = Math.floorMod(hour - HOUR_OFFSET, HOURS_PER_DAY) * NANOS_PER_HOUR;
-        nanoOfDay += minute * NANOS_PER_MINUTE;
-        nanoOfDay += second * NANOS_PER_SECOND;
-        nanoOfDay += nano;
+        return now(Clock.system(zone));
+    }
 
-        return create((int) (nanoOfDay / NANOS_PER_TICK));
+    /**
+     * Obtains an instance of {@code MinecraftTime} from the current time of the specified clock.
+     * <p>
+     * This will query the specified clock to obtain the current time. Using this method allows the
+     * use of an alternate clock for testing. The alternate clock may be introduced using
+     * {@linkplain Clock dependency injection}.
+     *
+     * @param clock The clock to use, not {@code null}.
+     * @return The current Minecraft time, not {@code null}.
+     */
+    @NonNull
+    public static MinecraftTime now(@NonNull Clock clock)
+    {
+        val instant     = clock.instant();
+        val zoneOffset  = clock.getZone().getRules().getOffset(instant);
+        val localSecond = instant.getEpochSecond() + zoneOffset.getTotalSeconds();
+        val secondOfDay = Math.floorMod(localSecond, SECONDS_PER_DAY);
+
+        return ofSecondOfDay(secondOfDay);
     }
 
     /**
@@ -228,62 +273,37 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         return create(hour, minute, second, 0);
     }
 
-    /**
-     * Obtains an instance of {@code MinecraftTime} from the current time of the system clock in the
-     * default time-zone.
-     * <p>
-     * This will query the {@linkplain Clock#systemDefaultZone() system clock} in the default
-     * time-zone to obtain the current time.
-     * <p>
-     * Using this method will prevent the ability to use an alternate clock for testing because the
-     * clock is hard-coded.
-     *
-     * @return The current Minecraft time using the system clock and default time-zone, not {@code null}.
-     */
     @NonNull
-    public static MinecraftTime now()
+    public static MinecraftTime ofNanoOfDay(final long nanoOfDay)
     {
-        return now(Clock.systemDefaultZone());
+        NANO_OF_DAY.checkValidValue(nanoOfDay);
+
+        val tickOfDay = (int) (Math.floorMod(nanoOfDay - NANOS_OF_HOUR_OFFSET, NANOS_PER_DAY) /
+                               NANOS_PER_TICK);
+        return create(tickOfDay);
     }
 
-    /**
-     * Obtains an instance of {@code MinecraftTime} from the current time of the system clock in the
-     * specified time-zone.
-     * <p>
-     * This will query the {@linkplain Clock#system(ZoneId) system clock} to obtain the current
-     * time. Specifying the time-zone avoids dependence on the default time-zone.
-     * <p>
-     * Using this method will prevent the ability to use an alternate clock for testing because the
-     * clock is hard-coded.
-     *
-     * @param zone The zone ID to use, not {@code null}.
-     * @return The current Minecraft time using the system clock, not {@code null}.
-     */
     @NonNull
-    public static MinecraftTime now(@NonNull ZoneId zone)
+    private static MinecraftTime create(final int tickOfDay)
     {
-        return now(Clock.system(zone));
+        return HOURS.containsKey(tickOfDay)
+               ? HOURS.get(tickOfDay)
+               : new MinecraftTime(tickOfDay);
     }
 
-    /**
-     * Obtains an instance of {@code MinecraftTime} from the current time of the specified clock.
-     * <p>
-     * This will query the specified clock to obtain the current time. Using this method allows the
-     * use of an alternate clock for testing. The alternate clock may be introduced using
-     * {@linkplain Clock dependency injection}.
-     *
-     * @param clock The clock to use, not {@code null}.
-     * @return The current Minecraft time, not {@code null}.
-     */
     @NonNull
-    public static MinecraftTime now(@NonNull Clock clock)
+    private static MinecraftTime create(
+            final int hour,
+            final int minute,
+            final int second,
+            final int nano)
     {
-        val instant     = clock.instant();
-        val zoneOffset  = clock.getZone().getRules().getOffset(instant);
-        val localSecond = instant.getEpochSecond() + zoneOffset.getTotalSeconds();
-        val secondOfDay = Math.floorMod(localSecond, SECONDS_PER_DAY);
+        var nanoOfDay = hour * NANOS_PER_HOUR;
+        nanoOfDay += minute * NANOS_PER_MINUTE;
+        nanoOfDay += second * NANOS_PER_SECOND;
+        nanoOfDay += nano;
 
-        return ofSecondOfDay(secondOfDay);
+        return ofNanoOfDay(nanoOfDay);
     }
     //</editor-fold>
     //</editor-fold>
