@@ -127,7 +127,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      */
     private final short tickOfDay;
 
-    private MinecraftTime(int tickOfDay)
+    private MinecraftTime(final int tickOfDay)
     {
         this.tickOfDay = (short) tickOfDay;
     }
@@ -167,7 +167,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The current Minecraft time using the system clock, not {@code null}.
      */
     @NonNull
-    public static MinecraftTime now(@NonNull ZoneId zone)
+    public static MinecraftTime now(@NonNull final ZoneId zone)
     {
         return now(Clock.system(zone));
     }
@@ -183,7 +183,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The current Minecraft time, not {@code null}.
      */
     @NonNull
-    public static MinecraftTime now(@NonNull Clock clock)
+    public static MinecraftTime now(@NonNull final Clock clock)
     {
         val instant     = clock.instant();
         val zoneOffset  = clock.getZone().getRules().getOffset(instant);
@@ -204,7 +204,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The Minecraft time, not {@code null}.
      */
     @NonNull
-    public static MinecraftTime of(int hour, int minute)
+    public static MinecraftTime of(final int hour, final int minute)
     {
         return of(hour, minute, 0, 0);
     }
@@ -221,13 +221,17 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The Minecraft time, not {@code null}.
      */
     @NonNull
-    public static MinecraftTime of(int hour, int minute, int second)
+    public static MinecraftTime of(final int hour, final int minute, final int second)
     {
         return of(hour, minute, second, 0);
     }
 
     @NonNull
-    public static MinecraftTime of(int hour, int minute, int second, int nano)
+    public static MinecraftTime of(
+            final int hour,
+            final int minute,
+            final int second,
+            final int nano)
     {
         HOUR_OF_DAY.checkValidValue(hour);
         MINUTE_OF_HOUR.checkValidValue(minute);
@@ -246,7 +250,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The Minecraft time, not {@code null}.
      */
     @NonNull
-    public static MinecraftTime ofTickOfDay(long tickOfDay)
+    public static MinecraftTime ofTickOfDay(final long tickOfDay)
     {
         TICK_OF_DAY.checkValidValue(tickOfDay);
         return create((int) tickOfDay);
@@ -262,7 +266,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The Minecraft time, not {@code null}.
      */
     @NonNull
-    public static MinecraftTime ofSecondOfDay(long secondOfDay)
+    public static MinecraftTime ofSecondOfDay(final long secondOfDay)
     {
         SECOND_OF_DAY.checkValidValue(secondOfDay);
 
@@ -310,14 +314,14 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
 
     //<editor-fold desc="Instance Methods">
     @Override
-    public long until(Temporal endExclusive, TemporalUnit unit)
+    public long until(final Temporal endExclusive, final TemporalUnit unit)
     {
         return 0;
     }
 
     //<editor-fold desc="Time Adjuster">
     @Override
-    public Temporal adjustInto(Temporal temporal)
+    public Temporal adjustInto(final Temporal temporal)
     {
         return temporal.isSupported(TICK_OF_DAY)
                ? temporal.with(TICK_OF_DAY, toTickOfDay())
@@ -327,7 +331,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
 
     //<editor-fold desc="Time Accessors">
     @Override
-    public boolean isSupported(TemporalField field)
+    public boolean isSupported(final TemporalField field)
     {
         return false;
     }
@@ -339,7 +343,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The value for the field.
      */
     @Override
-    public int get(TemporalField field)
+    public int get(final TemporalField field)
     {
         if ((field instanceof ChronoField) || (field instanceof MinecraftField))
         {
@@ -356,7 +360,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The value for the field.
      */
     @Override
-    public long getLong(TemporalField field)
+    public long getLong(final TemporalField field)
     {
         if ((field instanceof ChronoField) || (field instanceof MinecraftField))
         {
@@ -366,7 +370,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         return field.getFrom(this);
     }
 
-    private int getInt(TemporalField field)
+    private int getInt(final TemporalField field)
     {
         if (field instanceof ChronoField)
         {
@@ -468,7 +472,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
 
     //<editor-fold desc="Time Manipulators">
     @Override
-    public boolean isSupported(TemporalUnit unit)
+    public boolean isSupported(final TemporalUnit unit)
     {
         return false;
     }
@@ -484,7 +488,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return A {@code MinecraftTime} based on {@code this} with the adjustment made, not {@code null}.
      */
     @Override
-    public MinecraftTime with(@NonNull TemporalAdjuster adjuster)
+    public MinecraftTime with(@NonNull final TemporalAdjuster adjuster)
     {
         return (adjuster instanceof MinecraftTime)
                ? (MinecraftTime) adjuster
@@ -492,7 +496,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     }
 
     @Override
-    public MinecraftTime with(TemporalField field, long newValue)
+    public MinecraftTime with(final TemporalField field, final long newValue)
     {
         if (field instanceof ChronoField)
         {
@@ -510,7 +514,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         return null;
     }
 
-    public MinecraftTime withHour(int hour)
+    public MinecraftTime withHour(final int hour)
     {
         if (hour == getHour()) { return this; }
 
@@ -518,7 +522,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         return create(hour, getMinute(), getSecond(), 0);
     }
 
-    public MinecraftTime withMinute(int minute)
+    public MinecraftTime withMinute(final int minute)
     {
         if (minute == getMinute()) { return this; }
 
@@ -526,7 +530,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         return create(getHour(), minute, getSecond(), 0);
     }
 
-    public MinecraftTime withSecond(int second)
+    public MinecraftTime withSecond(final int second)
     {
         if (second == getSecond()) { return this; }
 
@@ -535,13 +539,13 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     }
 
     @Override
-    public MinecraftTime plus(TemporalAmount amount)
+    public MinecraftTime plus(final TemporalAmount amount)
     {
         return (MinecraftTime) amount.addTo(this);
     }
 
     @Override
-    public MinecraftTime plus(long amountToAdd, TemporalUnit unit)
+    public MinecraftTime plus(final long amountToAdd, final TemporalUnit unit)
     {
         if (unit instanceof ChronoUnit)
         {
@@ -570,7 +574,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         return unit.addTo(this, amountToAdd);
     }
 
-    public MinecraftTime plusHours(long hoursToAdd)
+    public MinecraftTime plusHours(final long hoursToAdd)
     {
         if (hoursToAdd == 0) { return this; }
 
@@ -582,7 +586,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
                : create(newHour, getMinute(), getSecond(), 0);
     }
 
-    public MinecraftTime plusMinutes(long minutesToAdd)
+    public MinecraftTime plusMinutes(final long minutesToAdd)
     {
         if (minutesToAdd == 0) { return this; }
 
@@ -596,7 +600,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         return create(newHour, newMinute, getSecond(), 0);
     }
 
-    public MinecraftTime plusTicks(long ticksToAdd)
+    public MinecraftTime plusTicks(final long ticksToAdd)
     {
         if (ticksToAdd == 0) { return this; }
 
@@ -606,7 +610,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
                : create((int) newTickOfDay);
     }
 
-    public MinecraftTime plusSeconds(long secondsToAdd)
+    public MinecraftTime plusSeconds(final long secondsToAdd)
     {
         if (secondsToAdd == 0) { return this; }
 
@@ -622,13 +626,13 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     }
 
     @Override
-    public MinecraftTime minus(TemporalAmount amount)
+    public MinecraftTime minus(final TemporalAmount amount)
     {
         return (MinecraftTime) amount.subtractFrom(this);
     }
 
     @Override
-    public MinecraftTime minus(long amountToSubtract, TemporalUnit unit)
+    public MinecraftTime minus(final long amountToSubtract, final TemporalUnit unit)
     {
         return (amountToSubtract == Long.MIN_VALUE)
                ? plus(Long.MAX_VALUE, unit).plus(1, unit)
@@ -637,7 +641,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     //</editor-fold>
 
     @Override
-    public boolean equals(Object that)
+    public boolean equals(final Object that)
     {
         if (that == this) { return true; }
 
