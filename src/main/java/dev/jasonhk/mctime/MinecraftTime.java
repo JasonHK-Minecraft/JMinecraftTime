@@ -134,7 +134,6 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
 
     //<editor-fold desc="Static Methods">
     //<editor-fold desc="TIME CREATORS">
-
     /**
      * Obtains an instance of {@code MinecraftTime} from the current time of the system clock in the
      * default time-zone.
@@ -269,12 +268,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     public static MinecraftTime ofSecondOfDay(final long secondOfDay)
     {
         SECOND_OF_DAY.checkValidValue(secondOfDay);
-
-        val hour   = (int) (secondOfDay / SECONDS_PER_HOUR);
-        val minute = (int) ((secondOfDay % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE);
-        val second = (int) (secondOfDay % SECONDS_PER_MINUTE);
-
-        return create(hour, minute, second, 0);
+        return ofNanoOfDay(secondOfDay * NANOS_PER_SECOND);
     }
 
     @NonNull
