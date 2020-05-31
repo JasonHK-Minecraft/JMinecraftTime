@@ -281,10 +281,8 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     public static MinecraftTime ofNanoOfDay(final long nanoOfDay)
     {
         NANO_OF_DAY.checkValidValue(nanoOfDay);
-
-        val tickOfDay = (int) (Math.floorMod(nanoOfDay - NANOS_OF_HOUR_OFFSET, NANOS_PER_DAY) /
-                               NANOS_PER_TICK);
-        return create(tickOfDay);
+        return create((int) (Math.floorMod(nanoOfDay - NANOS_OF_HOUR_OFFSET, NANOS_PER_DAY) /
+                             NANOS_PER_TICK));
     }
 
     @NonNull
