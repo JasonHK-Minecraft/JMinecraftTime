@@ -1,1 +1,1 @@
-rootProject.name = "McTime4j"
+rootProject.name = "JMinecraftTime"

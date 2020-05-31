@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/McTime4j.iml" filepath="$PROJECT_DIR$/.idea/modules/McTime4j.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/McTime4j.main.iml" filepath="$PROJECT_DIR$/.idea/modules/McTime4j.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/McTime4j.test.iml" filepath="$PROJECT_DIR$/.idea/modules/McTime4j.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/JMinecraftTime.iml" filepath="$PROJECT_DIR$/.idea/modules/JMinecraftTime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/JMinecraftTime.main.iml" filepath="$PROJECT_DIR$/.idea/modules/JMinecraftTime.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/JMinecraftTime.test.iml" filepath="$PROJECT_DIR$/.idea/modules/JMinecraftTime.test.iml" />
     </modules>
   </component>
 </project>

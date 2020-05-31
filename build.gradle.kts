@@ -1,6 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent;
 
-group = "dev.jasonhk.mctime"
+group = "dev.jasonhk.minecraft.time"
 version = "0.0.1"
 
 allprojects {
