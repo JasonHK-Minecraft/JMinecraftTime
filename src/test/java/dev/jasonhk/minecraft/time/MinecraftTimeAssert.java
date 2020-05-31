@@ -1,4 +1,4 @@
-package dev.jasonhk.mctime;
+package dev.jasonhk.minecraft.time;
 
 import org.assertj.core.api.AbstractAssert;
 

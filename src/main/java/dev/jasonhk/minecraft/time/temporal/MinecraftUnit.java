@@ -1,4 +1,4 @@
-package dev.jasonhk.mctime.temporal;
+package dev.jasonhk.minecraft.time.temporal;
 
 import java.time.Duration;
 import java.time.temporal.Temporal;

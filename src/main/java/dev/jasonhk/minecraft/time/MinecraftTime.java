@@ -1,4 +1,4 @@
-package dev.jasonhk.mctime;
+package dev.jasonhk.minecraft.time;
 
 import java.time.Clock;
 import java.time.ZoneId;
@@ -22,19 +22,19 @@ import lombok.NonNull;
 import lombok.val;
 import lombok.var;
 
-import dev.jasonhk.mctime.temporal.MinecraftField;
-import dev.jasonhk.mctime.temporal.MinecraftUnit;
-import static dev.jasonhk.mctime.RealTime.HOURS_PER_DAY;
-import static dev.jasonhk.mctime.RealTime.MINUTES_PER_DAY;
-import static dev.jasonhk.mctime.RealTime.MINUTES_PER_HOUR;
-import static dev.jasonhk.mctime.RealTime.NANOS_PER_DAY;
-import static dev.jasonhk.mctime.RealTime.NANOS_PER_HOUR;
-import static dev.jasonhk.mctime.RealTime.NANOS_PER_MINUTE;
-import static dev.jasonhk.mctime.RealTime.NANOS_PER_SECOND;
-import static dev.jasonhk.mctime.RealTime.SECONDS_PER_DAY;
-import static dev.jasonhk.mctime.RealTime.SECONDS_PER_HOUR;
-import static dev.jasonhk.mctime.RealTime.SECONDS_PER_MINUTE;
-import static dev.jasonhk.mctime.temporal.MinecraftField.TICK_OF_DAY;
+import dev.jasonhk.minecraft.time.temporal.MinecraftField;
+import dev.jasonhk.minecraft.time.temporal.MinecraftUnit;
+import static dev.jasonhk.minecraft.time.RealTime.HOURS_PER_DAY;
+import static dev.jasonhk.minecraft.time.RealTime.MINUTES_PER_DAY;
+import static dev.jasonhk.minecraft.time.RealTime.MINUTES_PER_HOUR;
+import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_DAY;
+import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_HOUR;
+import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_MINUTE;
+import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_SECOND;
+import static dev.jasonhk.minecraft.time.RealTime.SECONDS_PER_DAY;
+import static dev.jasonhk.minecraft.time.RealTime.SECONDS_PER_HOUR;
+import static dev.jasonhk.minecraft.time.RealTime.SECONDS_PER_MINUTE;
+import static dev.jasonhk.minecraft.time.temporal.MinecraftField.TICK_OF_DAY;
 
 @SuppressWarnings("unused")
 public final class MinecraftTime implements Temporal, TemporalAdjuster
@@ -134,6 +134,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
 
     //<editor-fold desc="Static Methods">
     //<editor-fold desc="TIME CREATORS">
+
     /**
      * Obtains an instance of {@code MinecraftTime} from the current time of the system clock in the
      * default time-zone.
@@ -458,7 +459,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
 
     public long toNanoOfDay()
     {
-        return Math.floorMod(tickOfDay, TICKS_PER_DAY);
+        return Math.floorMod((tickOfDay * NANOS_PER_TICK) + NANOS_OF_HOUR_OFFSET, TICKS_PER_DAY);
     }
     //</editor-fold>
 

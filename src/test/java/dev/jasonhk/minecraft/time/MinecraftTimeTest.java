@@ -1,9 +1,7 @@
-package dev.jasonhk.mctime;
+package dev.jasonhk.minecraft.time;
 
 import java.time.DateTimeException;
 import java.util.stream.Stream;
-
-import static dev.jasonhk.mctime.MinecraftTimeAssert.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -32,8 +30,8 @@ public class MinecraftTimeTest
                     final long nanoOfDay,
                     final long tickOfDay)
             {
-                assertThat(MinecraftTime.ofNanoOfDay(nanoOfDay))
-                        .hasTickOfDay(tickOfDay);
+                MinecraftTimeAssert.assertThat(MinecraftTime.ofNanoOfDay(nanoOfDay))
+                                   .hasTickOfDay(tickOfDay);
             }
 
             @ParameterizedTest(name = "when the nano-of-day value is {0}")
@@ -52,8 +50,8 @@ public class MinecraftTimeTest
             @MethodSource
             void should_return_an_instance_of_MinecraftTime(final long tickOfDay)
             {
-                assertThat(MinecraftTime.ofTickOfDay(tickOfDay))
-                        .hasTickOfDay(tickOfDay);
+                MinecraftTimeAssert.assertThat(MinecraftTime.ofTickOfDay(tickOfDay))
+                                   .hasTickOfDay(tickOfDay);
             }
 
             @ParameterizedTest(name = "when the tick-of-day value is {0}")
