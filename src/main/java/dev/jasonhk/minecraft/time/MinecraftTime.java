@@ -402,6 +402,11 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         {
             switch ((ChronoField) field)
             {
+                case NANO_OF_SECOND:
+                    return getNano();
+                case NANO_OF_DAY:
+                    throw new UnsupportedTemporalTypeException(
+                            "Invalid field `NanoOfDay` for get() method, use getLong() instead.");
                 case SECOND_OF_MINUTE:
                     return getSecond();
                 case SECOND_OF_DAY:
