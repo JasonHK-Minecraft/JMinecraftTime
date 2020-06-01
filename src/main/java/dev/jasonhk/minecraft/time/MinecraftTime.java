@@ -166,7 +166,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     }
 
     //<editor-fold desc="Static Methods">
-    //<editor-fold desc="TIME CREATORS">
+    //<editor-fold desc="Time Creators">
 
     /**
      * Obtains an instance of {@code MinecraftTime} from the current time of the system clock in the
