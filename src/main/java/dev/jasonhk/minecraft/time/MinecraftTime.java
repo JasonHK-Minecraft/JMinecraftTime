@@ -459,7 +459,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     /**
      * Gets the second-of-minute field.
      *
-     * @return The second-of-hour, from {@code 0} to {@code 59}.
+     * @return The second-of-minute, from {@code 0} to {@code 59}.
      */
     public int getSecond()
     {
