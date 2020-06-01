@@ -466,6 +466,11 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         return (int) ((toNanoOfDay() % NANOS_PER_MINUTE) / NANOS_PER_SECOND);
     }
 
+    public int getNano()
+    {
+        return (int) (toNanoOfDay() % NANOS_PER_SECOND);
+    }
+
     /**
      * Extracts the time as ticks of day, from {@code 0} to {@code 23999}.
      *
