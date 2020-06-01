@@ -80,6 +80,20 @@ public class MinecraftTimeTest
             @Nested
             class toNanoOfDay extends toNanoOfDay_Base
             {
+                @ParameterizedTest(name = "when the nano-of-day value is {0}")
+                @DisplayName("should return the nano-of-day value from the given nano-of-day value")
+                @MethodSource
+                void should_return_the_nano_of_day_value_from_the_given_nano_of_day_value(
+                        final long originalNanoOfDay,
+                        final long roundedNanoOfDay)
+                {
+                    val time = MinecraftTime.ofNanoOfDay(originalNanoOfDay);
+
+                    assertThat(time.toNanoOfDay())
+                            .isBetween(0L, 86_399_999_999_999L)
+                            .isEqualTo(roundedNanoOfDay);
+                }
+
                 @ParameterizedTest(name = "when the tick-of-day value is {0}")
                 @DisplayName("should return the nano-of-day value from the given tick-of-day value")
                 @MethodSource
@@ -159,6 +173,12 @@ public class MinecraftTimeTest
         {
             static class toNanoOfDay_Base
             {
+                static Stream<Arguments> should_return_the_nano_of_day_value_from_the_given_nano_of_day_value()
+                {
+                    return Stream.of(Arguments.of(0L, 0L),
+                                     Arguments.of(86_399_999_999_999L, 86_396_400_000_000L));
+                }
+
                 static Stream<Arguments> should_return_the_nano_of_day_value_from_the_given_tick_of_day_value()
                 {
                     return Stream.of(Arguments.of(0, 21_600_000_000_000L),
