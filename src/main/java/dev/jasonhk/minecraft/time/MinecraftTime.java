@@ -443,7 +443,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      */
     public int getHour()
     {
-        return ((tickOfDay / TICKS_PER_HOUR) + HOUR_OFFSET) % HOURS_PER_DAY;
+        return (int) (toNanoOfDay() / NANOS_PER_HOUR);
     }
 
     /**
@@ -453,7 +453,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      */
     public int getMinute()
     {
-        return (int) ((tickOfDay % TICKS_PER_HOUR) / TICKS_PER_MINUTE);
+        return (int) ((toNanoOfDay() % NANOS_PER_HOUR) / NANOS_PER_MINUTE);
     }
 
     /**
@@ -463,7 +463,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      */
     public int getSecond()
     {
-        return (int) ((tickOfDay % TICKS_PER_MINUTE) / TICKS_PER_SECOND);
+        return (int) ((toNanoOfDay() % NANOS_PER_MINUTE) / NANOS_PER_SECOND);
     }
 
     /**
@@ -483,11 +483,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      */
     public int toSecondOfDay()
     {
-        var secondOfDay = getHour() * SECONDS_PER_HOUR;
-        secondOfDay += getMinute() * SECONDS_PER_MINUTE;
-        secondOfDay += getSecond();
-
-        return secondOfDay;
+        return (int) (toNanoOfDay() / NANOS_PER_SECOND);
     }
 
     public long toNanoOfDay()
