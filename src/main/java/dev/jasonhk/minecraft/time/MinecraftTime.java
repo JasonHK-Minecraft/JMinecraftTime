@@ -492,7 +492,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
 
     public long toNanoOfDay()
     {
-        return Math.floorMod((tickOfDay * NANOS_PER_TICK) + NANOS_OF_HOUR_OFFSET, TICKS_PER_DAY);
+        return Math.floorMod((tickOfDay * NANOS_PER_TICK) + NANOS_OF_HOUR_OFFSET, NANOS_PER_DAY);
     }
     //</editor-fold>
 
