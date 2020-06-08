@@ -1,6 +1,8 @@
 package dev.jasonhk.minecraft.time;
 
 import java.time.DateTimeException;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.stream.Stream;
 
 import lombok.val;
@@ -31,12 +33,21 @@ public class MinecraftTimeTest
         class Time_Creator extends Time_Creators_Base
         {
             @Nested
-            class now
+            class now extends now_Base
             {
                 @Test
                 void should_return_an_instance_of_MinecraftTime_from_the_current_time()
                 {
                     assertThat(MinecraftTime.now())
+                            .isMinecraftTime();
+                }
+
+                @ParameterizedTest
+                @MethodSource
+                void should_return_an_instance_of_MinecraftTime_from_the_current_time_of_a_time_zone(
+                        final ZoneId zone)
+                {
+                    assertThat(MinecraftTime.now(zone))
                             .isMinecraftTime();
                 }
             }
@@ -253,6 +264,20 @@ public class MinecraftTimeTest
     {
         static class Time_Creators_Base
         {
+            static class now_Base
+            {
+                static Stream<Arguments> should_return_an_instance_of_MinecraftTime_from_the_current_time_of_a_time_zone()
+                {
+                    return Stream.of(Arguments.of(ZoneId.of("Etc/UCT")),
+                                     Arguments.of(ZoneId.of("America/New_York")),
+                                     Arguments.of(ZoneId.of("Europe/London")),
+                                     Arguments.of(ZoneId.of("Asia/Hong_Kong")),
+                                     Arguments.of(ZoneOffset.of("Z")),
+                                     Arguments.of(ZoneOffset.of("+14:00")),
+                                     Arguments.of(ZoneOffset.of("-12:00")));
+                }
+            }
+
             static class of_Base
             {
                 static Stream<Arguments> should_return_an_instance_of_MinecraftTime_from_the_given_hour_and_minute_value()
