@@ -18,6 +18,8 @@ import static java.time.temporal.ChronoField.NANO_OF_SECOND;
 import static java.time.temporal.ChronoField.SECOND_OF_DAY;
 import static java.time.temporal.ChronoField.SECOND_OF_MINUTE;
 
+import org.apiguardian.api.API;
+
 import lombok.NonNull;
 import lombok.val;
 import lombok.var;
@@ -39,6 +41,7 @@ import static dev.jasonhk.minecraft.time.RealTime.SECONDS_PER_MINUTE;
 import static dev.jasonhk.minecraft.time.temporal.MinecraftField.TICK_OF_DAY;
 
 @SuppressWarnings("unused")
+@API(status = API.Status.STABLE, since = "0.0.1")
 public final class MinecraftTime implements Temporal, TemporalAdjuster
 {
     //<editor-fold desc="Static Fields">
@@ -47,48 +50,56 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * The minimum supported {@code MinecraftTime}, {@code 0} tick. This equals to 06:00, the start
      * of a Minecraft day.
      */
+    @API(status = API.Status.STABLE, since = "0.0.1")
     public static final MinecraftTime MIN;
 
     /**
      * The time set when using the {@code /time set day} command in-game, {@code 1000} tick. This
      * equals to 07:00 of a Minecraft day.
      */
+    @API(status = API.Status.STABLE, since = "0.0.1")
     public static final MinecraftTime DAY;
 
     /**
      * The time set when using the {@code /time set noon} command in-game, {@code 6000} tick. This
      * equals to 12:00 of a Minecraft day.
      */
+    @API(status = API.Status.STABLE, since = "0.0.1")
     public static final MinecraftTime NOON;
 
     /**
      * The time set when using the {@code /time set sunset} command in-game, {@code 12000} tick.
      * This equals to 18:00 of a Minecraft day.
      */
+    @API(status = API.Status.STABLE, since = "0.0.1")
     public static final MinecraftTime SUNSET;
 
     /**
      * The time set when using the {@code /time set night} command in-game, {@code 13000} tick. This
      * equals to 19:00 of a Minecraft day.
      */
+    @API(status = API.Status.STABLE, since = "0.0.1")
     public static final MinecraftTime NIGHT;
 
     /**
      * The time set when using the {@code /time set midnight} command in-game, {@code 18000} tick.
      * This equals to 00:00 of a Minecraft day.
      */
+    @API(status = API.Status.STABLE, since = "0.0.1")
     public static final MinecraftTime MIDNIGHT;
 
     /**
      * The time set when using the {@code /time set sunrise} command in-game, {@code 23000} tick.
      * This equals to 05:00 of a Minecraft day.
      */
+    @API(status = API.Status.STABLE, since = "0.0.1")
     public static final MinecraftTime SUNRISE;
 
     /**
      * The maximum supported {@code MinecraftTime}, {@code 23999} tick. This equals to 05:59:56.4,
      * the end of a Minecraft day.
      */
+    @API(status = API.Status.STABLE, since = "0.0.1")
     public static final MinecraftTime MAX;
 
     private static final HashMap<Integer, MinecraftTime> HOURS = new HashMap<>(HOURS_PER_DAY);
