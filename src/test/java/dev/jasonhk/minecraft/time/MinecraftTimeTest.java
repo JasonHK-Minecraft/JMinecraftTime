@@ -32,7 +32,7 @@ public class MinecraftTimeTest
             @Nested
             class of extends of_Base
             {
-                @ParameterizedTest(name = "when the hour and minute value is {0} and {1}")
+                @ParameterizedTest(name = "when the hour and minute value are {0} and {1}")
                 @MethodSource
                 void should_return_an_instance_of_MinecraftTime_from_the_given_hour_and_minute_value(
                         final int hour,
