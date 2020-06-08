@@ -1,6 +1,7 @@
 package dev.jasonhk.minecraft.time.temporal;
 
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalUnit;
 
@@ -34,7 +35,9 @@ public enum MinecraftUnit implements TemporalUnit
     @Override
     public <R extends Temporal> R addTo(final R temporal, final long amount)
     {
-        return (R) temporal.plus(amount, this);
+        return isTimeBased()
+               ? (R) temporal.plus(duration.multipliedBy(amount).toNanos(), ChronoUnit.NANOS)
+               : (R) temporal.plus(duration.multipliedBy(amount).toDays(), ChronoUnit.DAYS);
     }
 
     @Override
@@ -53,6 +56,12 @@ public enum MinecraftUnit implements TemporalUnit
     public boolean isTimeBased()
     {
         return (type == UnitType.TIME_BASED);
+    }
+
+    @Override
+    public boolean isSupportedBy(final Temporal temporal)
+    {
+        return temporal.isSupported(isTimeBased() ? ChronoUnit.NANOS : ChronoUnit.DAYS);
     }
 
     @Override
