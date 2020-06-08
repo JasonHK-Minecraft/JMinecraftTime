@@ -42,6 +42,19 @@ public class MinecraftTimeTest
                     assertThat(MinecraftTime.of(hour, minute))
                             .hasTickOfDay(tickOfDay);
                 }
+
+                @ParameterizedTest(name = "when the hour, minute and second value are {0}, {1} and {2}")
+                @DisplayName("should return an instance of MinecraftTime from the given hour, minute and second value")
+                @MethodSource
+                void should_return_an_instance_of_MinecraftTime_from_the_given_hour_minute_and_second_value(
+                        final int hour,
+                        final int minute,
+                        final int second,
+                        final int tickOfDay)
+                {
+                    assertThat(MinecraftTime.of(hour, minute, second))
+                            .hasTickOfDay(tickOfDay);
+                }
             }
 
             @Nested
@@ -210,6 +223,14 @@ public class MinecraftTimeTest
                                      Arguments.of(5, 59, 23_983),
                                      Arguments.of(6, 0, 0),
                                      Arguments.of(23, 59, 17_983));
+                }
+
+                static Stream<Arguments> should_return_an_instance_of_MinecraftTime_from_the_given_hour_minute_and_second_value()
+                {
+                    return Stream.of(Arguments.of(0, 0, 0, 18_000),
+                                     Arguments.of(5, 59, 59, 23_999),
+                                     Arguments.of(6, 0, 0, 0),
+                                     Arguments.of(23, 59, 59, 17_999));
                 }
             }
 
