@@ -18,6 +18,16 @@ final class RealTime
     static final int SECONDS_PER_MINUTE = 60;
 
     /**
+     * Milliseconds per second.
+     */
+    static final int MILLIS_PER_SECOND = 1_000;
+
+    /**
+     * Microseconds per second.
+     */
+    static final int MICROS_PER_SECOND = 1_000_000;
+
+    /**
      * Nanoseconds per second.
      */
     static final long NANOS_PER_SECOND = 1_000_000_000;
@@ -36,6 +46,10 @@ final class RealTime
      * Seconds per day.
      */
     static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
+
+    static final int NANOS_PER_MICRO = (int) (NANOS_PER_SECOND / MICROS_PER_SECOND);
+
+    static final int NANOS_PER_MILLI = (int) (NANOS_PER_SECOND / MILLIS_PER_SECOND);
 
     static final long NANOS_PER_MINUTE = NANOS_PER_SECOND * SECONDS_PER_MINUTE;
 
