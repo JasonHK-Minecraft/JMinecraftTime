@@ -5,6 +5,8 @@ import java.util.stream.Stream;
 
 import lombok.val;
 
+import static dev.jasonhk.minecraft.time.MinecraftTimeAssert.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
@@ -28,6 +30,21 @@ public class MinecraftTimeTest
         class Time_Creator extends Time_Creators_Base
         {
             @Nested
+            class of extends of_Base
+            {
+                @ParameterizedTest(name = "when the hour and minute value is {0} and {1}")
+                @MethodSource
+                void should_return_an_instance_of_MinecraftTime_from_the_given_hour_and_minute_value(
+                        final int hour,
+                        final int minute,
+                        final int tickOfDay)
+                {
+                    assertThat(MinecraftTime.of(hour, minute))
+                            .hasTickOfDay(tickOfDay);
+                }
+            }
+
+            @Nested
             class ofNanoOfDay extends ofNanoOfDay_Base
             {
                 @ParameterizedTest(name = "when the nano-of-day value is {0}")
@@ -36,8 +53,8 @@ public class MinecraftTimeTest
                         final long nanoOfDay,
                         final int tickOfDay)
                 {
-                    MinecraftTimeAssert.assertThat(MinecraftTime.ofNanoOfDay(nanoOfDay))
-                                       .hasTickOfDay(tickOfDay);
+                    assertThat(MinecraftTime.ofNanoOfDay(nanoOfDay))
+                            .hasTickOfDay(tickOfDay);
                 }
 
                 @ParameterizedTest(name = "when the nano-of-day value is {0}")
@@ -58,8 +75,8 @@ public class MinecraftTimeTest
                         final int secondOfDay,
                         final int tickOfDay)
                 {
-                    MinecraftTimeAssert.assertThat(MinecraftTime.ofSecondOfDay(secondOfDay))
-                                       .hasTickOfDay(tickOfDay);
+                    assertThat(MinecraftTime.ofSecondOfDay(secondOfDay))
+                            .hasTickOfDay(tickOfDay);
                 }
 
                 @ParameterizedTest(name = "when the second-of-day value is {0}")
@@ -78,8 +95,8 @@ public class MinecraftTimeTest
                 @MethodSource
                 void should_return_an_instance_of_MinecraftTime(final int tickOfDay)
                 {
-                    MinecraftTimeAssert.assertThat(MinecraftTime.ofTickOfDay(tickOfDay))
-                                       .hasTickOfDay(tickOfDay);
+                    assertThat(MinecraftTime.ofTickOfDay(tickOfDay))
+                            .hasTickOfDay(tickOfDay);
                 }
 
                 @ParameterizedTest(name = "when the tick-of-day value is {0}")
@@ -185,6 +202,17 @@ public class MinecraftTimeTest
     {
         static class Time_Creators_Base
         {
+            static class of_Base
+            {
+                static Stream<Arguments> should_return_an_instance_of_MinecraftTime_from_the_given_hour_and_minute_value()
+                {
+                    return Stream.of(Arguments.of(0, 0, 18_000),
+                                     Arguments.of(5, 59, 23_983),
+                                     Arguments.of(6, 0, 0),
+                                     Arguments.of(23, 59, 17_983));
+                }
+            }
+
             static class ofNanoOfDay_Base
             {
                 static Stream<Arguments> should_return_an_instance_of_MinecraftTime()
