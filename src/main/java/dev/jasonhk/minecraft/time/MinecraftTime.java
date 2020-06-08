@@ -90,6 +90,8 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * the end of a Minecraft day.
      */
     public static final MinecraftTime MAX;
+
+    private static final HashMap<Integer, MinecraftTime> HOURS = new HashMap<>(HOURS_PER_DAY);
     //</editor-fold>
 
     /**
@@ -134,8 +136,6 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     static final long NANOS_PER_TICKS_PER_SECOND = (long) (TICKS_PER_SECOND * NANOS_PER_SECOND);
 
     private static final long NANOS_OF_HOUR_OFFSET = HOUR_OFFSET * NANOS_PER_HOUR;
-
-    private static final HashMap<Integer, MinecraftTime> HOURS = new HashMap<>(HOURS_PER_DAY);
     //</editor-fold>
 
     static
