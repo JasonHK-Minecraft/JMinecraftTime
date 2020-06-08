@@ -394,7 +394,19 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     @Override
     public long getLong(@NonNull final TemporalField field)
     {
-        if ((field instanceof ChronoField) || (field instanceof MinecraftField))
+        if (field instanceof ChronoField)
+        {
+            switch ((ChronoField) field)
+            {
+                case NANO_OF_DAY:
+                    return toNanoOfDay();
+                case MICRO_OF_DAY:
+                    return (toNanoOfDay() / NANOS_PER_MICRO);
+                default:
+                    return getInt(field);
+            }
+        }
+        else if (field instanceof MinecraftField)
         {
             return getInt(field);
         }
@@ -413,6 +425,15 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
                 case NANO_OF_DAY:
                     throw new UnsupportedTemporalTypeException(
                             "Invalid field `NanoOfDay` for get() method, use getLong() instead.");
+                case MICRO_OF_SECOND:
+                    return (getNano() / NANOS_PER_MICRO);
+                case MICRO_OF_DAY:
+                    throw new UnsupportedTemporalTypeException(
+                            "Invalid field `MICRO_OF_DAY` for get() method, use getLong() instead.");
+                case MILLI_OF_SECOND:
+                    return (getNano() / NANOS_PER_MILLI);
+                case MILLI_OF_DAY:
+                    return (int) (toNanoOfDay() / NANOS_PER_MILLI);
                 case SECOND_OF_MINUTE:
                     return getSecond();
                 case SECOND_OF_DAY:
