@@ -371,7 +371,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The value for the field.
      */
     @Override
-    public int get(final TemporalField field)
+    public int get(@NonNull final TemporalField field)
     {
         if ((field instanceof ChronoField) || (field instanceof MinecraftField))
         {
@@ -388,7 +388,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * @return The value for the field.
      */
     @Override
-    public long getLong(final TemporalField field)
+    public long getLong(@NonNull final TemporalField field)
     {
         if ((field instanceof ChronoField) || (field instanceof MinecraftField))
         {
