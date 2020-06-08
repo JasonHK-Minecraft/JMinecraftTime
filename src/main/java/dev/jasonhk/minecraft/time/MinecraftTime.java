@@ -155,10 +155,12 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
         SUNRISE = HOURS.get(23000);
     }
 
+    //<editor-fold desc="Instance Fields">
     /**
      * The tick-of-day, from {@code 0} to {@code 23999}.
      */
     private final short tickOfDay;
+    //</editor-fold>
 
     private MinecraftTime(final int tickOfDay)
     {
