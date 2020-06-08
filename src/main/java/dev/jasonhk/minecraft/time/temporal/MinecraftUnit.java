@@ -13,12 +13,16 @@ public enum MinecraftUnit implements TemporalUnit
     private final Duration duration;
     private final boolean  durationEstimated;
 
-    MinecraftUnit(String name, UnitType type, Duration duration)
+    MinecraftUnit(final String name, final UnitType type, final Duration duration)
     {
         this(name, type, duration, false);
     }
 
-    MinecraftUnit(String name, UnitType type, Duration duration, boolean durationEstimated)
+    MinecraftUnit(
+            final String name,
+            final UnitType type,
+            final Duration duration,
+            final boolean durationEstimated)
     {
         this.name = name;
         this.type = type;
@@ -28,7 +32,7 @@ public enum MinecraftUnit implements TemporalUnit
 
     @SuppressWarnings("unchecked")
     @Override
-    public <R extends Temporal> R addTo(R temporal, long amount)
+    public <R extends Temporal> R addTo(final R temporal, final long amount)
     {
         return (R) temporal.plus(amount, this);
     }
