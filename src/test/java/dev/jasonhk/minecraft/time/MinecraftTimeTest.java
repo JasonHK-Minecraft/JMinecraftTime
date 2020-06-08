@@ -110,6 +110,38 @@ public class MinecraftTimeTest
             }
 
             @Nested
+            class toSecondOfDay extends toSecondOfDay_Base
+            {
+                @ParameterizedTest(name = "when the second-of-day value is {0}")
+                @DisplayName("should return the second-of-day value from the given second-of-day value")
+                @MethodSource
+                void should_return_the_second_of_day_value_from_the_given_second_of_day_value(
+                        final int originalSecondOfDay,
+                        final int roundedSecondOfDay)
+                {
+                    val time = MinecraftTime.ofSecondOfDay(originalSecondOfDay);
+
+                    assertThat(time.toSecondOfDay())
+                            .isBetween(0, 86_399)
+                            .isEqualTo(roundedSecondOfDay);
+                }
+
+                @ParameterizedTest(name = "when the tick-of-day value is {0}")
+                @DisplayName("should return the second-of-day value from the given tick-of-day value")
+                @MethodSource
+                void should_return_the_second_of_day_value_from_the_given_tick_of_day_value(
+                        final int tickOfDay,
+                        final int secondOfDay)
+                {
+                    val time = MinecraftTime.ofTickOfDay(tickOfDay);
+
+                    assertThat(time.toSecondOfDay())
+                            .isBetween(0, 86_399)
+                            .isEqualTo(secondOfDay);
+                }
+            }
+
+            @Nested
             class toTickOfDay extends toTickOfDay_Base
             {
                 @ParameterizedTest(name = "when the tick-of-day value is {0}")
@@ -185,6 +217,23 @@ public class MinecraftTimeTest
                                      Arguments.of(17_999, 86_396_400_000_000L),
                                      Arguments.of(18_000, 0L),
                                      Arguments.of(23_999, 21_596_400_000_000L));
+                }
+            }
+
+            static class toSecondOfDay_Base
+            {
+                static Stream<Arguments> should_return_the_second_of_day_value_from_the_given_second_of_day_value()
+                {
+                    return Stream.of(Arguments.of(0, 0),
+                                     Arguments.of(86_399, 86_396));
+                }
+
+                static Stream<Arguments> should_return_the_second_of_day_value_from_the_given_tick_of_day_value()
+                {
+                    return Stream.of(Arguments.of(0, 21_600),
+                                     Arguments.of(17_999, 86_396),
+                                     Arguments.of(18_000, 0),
+                                     Arguments.of(23_999, 21_596));
                 }
             }
 
