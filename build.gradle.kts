@@ -20,6 +20,8 @@ plugins {
 }
 
 dependencies {
+    implementation("org.apiguardian", "apiguardian-api", "1.1.0")
+
     testImplementation("org.assertj", "assertj-core", "3.16.1")
     testImplementation("org.junit.jupiter", "junit-jupiter", "5.6.2")
 }
