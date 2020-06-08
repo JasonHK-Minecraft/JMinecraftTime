@@ -24,20 +24,22 @@ import lombok.NonNull;
 import lombok.val;
 import lombok.var;
 
+import dev.jasonhk.minecraft.time.internal.GameTime;
+import dev.jasonhk.minecraft.time.internal.RealTime;
 import dev.jasonhk.minecraft.time.temporal.MinecraftField;
 import dev.jasonhk.minecraft.time.temporal.MinecraftUnit;
-import static dev.jasonhk.minecraft.time.RealTime.HOURS_PER_DAY;
-import static dev.jasonhk.minecraft.time.RealTime.MINUTES_PER_DAY;
-import static dev.jasonhk.minecraft.time.RealTime.MINUTES_PER_HOUR;
-import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_DAY;
-import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_HOUR;
-import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_MICRO;
-import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_MILLI;
-import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_MINUTE;
-import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_SECOND;
-import static dev.jasonhk.minecraft.time.RealTime.SECONDS_PER_DAY;
-import static dev.jasonhk.minecraft.time.RealTime.SECONDS_PER_HOUR;
-import static dev.jasonhk.minecraft.time.RealTime.SECONDS_PER_MINUTE;
+import static dev.jasonhk.minecraft.time.internal.RealTime.HOURS_PER_DAY;
+import static dev.jasonhk.minecraft.time.internal.RealTime.MINUTES_PER_DAY;
+import static dev.jasonhk.minecraft.time.internal.RealTime.MINUTES_PER_HOUR;
+import static dev.jasonhk.minecraft.time.internal.RealTime.NANOS_PER_DAY;
+import static dev.jasonhk.minecraft.time.internal.RealTime.NANOS_PER_HOUR;
+import static dev.jasonhk.minecraft.time.internal.RealTime.NANOS_PER_MICRO;
+import static dev.jasonhk.minecraft.time.internal.RealTime.NANOS_PER_MILLI;
+import static dev.jasonhk.minecraft.time.internal.RealTime.NANOS_PER_MINUTE;
+import static dev.jasonhk.minecraft.time.internal.RealTime.NANOS_PER_SECOND;
+import static dev.jasonhk.minecraft.time.internal.RealTime.SECONDS_PER_DAY;
+import static dev.jasonhk.minecraft.time.internal.RealTime.SECONDS_PER_HOUR;
+import static dev.jasonhk.minecraft.time.internal.RealTime.SECONDS_PER_MINUTE;
 import static dev.jasonhk.minecraft.time.temporal.MinecraftField.TICK_OF_DAY;
 
 @SuppressWarnings("unused")
