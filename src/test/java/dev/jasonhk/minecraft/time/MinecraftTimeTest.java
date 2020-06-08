@@ -69,6 +69,18 @@ public class MinecraftTimeTest
                     assertThat(MinecraftTime.of(hour, minute, second, nano))
                             .hasTickOfDay(tickOfDay);
                 }
+
+                @ParameterizedTest(name = "when the hour, minute, second and nano value are {0}, {1}, {2} and {3}")
+                @MethodSource
+                void should_throw_a_DateTimeException_when_the_range_was_invalid(
+                        final int hour,
+                        final int minute,
+                        final int second,
+                        final int nano)
+                {
+                    assertThatThrownBy(() -> { MinecraftTime.of(hour, minute, second, nano); })
+                            .isInstanceOf(DateTimeException.class);
+                }
             }
 
             @Nested
@@ -253,6 +265,18 @@ public class MinecraftTimeTest
                                      Arguments.of(5, 59, 59, 999_999_999, 23_999),
                                      Arguments.of(6, 0, 0, 0, 0),
                                      Arguments.of(23, 59, 59, 999_999_999, 17_999));
+                }
+
+                static Stream<Arguments> should_throw_a_DateTimeException_when_the_range_was_invalid()
+                {
+                    return Stream.of(Arguments.of(-1, 0, 0, 0),
+                                     Arguments.of(24, 0, 0, 0),
+                                     Arguments.of(0, -1, 0, 0),
+                                     Arguments.of(0, 60, 0, 0),
+                                     Arguments.of(0, 0, -1, 0),
+                                     Arguments.of(0, 0, 60, 0),
+                                     Arguments.of(0, 0, 0, -1),
+                                     Arguments.of(0, 0, 0, 1_000_000_000));
                 }
             }
 
