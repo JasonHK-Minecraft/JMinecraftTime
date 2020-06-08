@@ -29,6 +29,8 @@ import static dev.jasonhk.minecraft.time.RealTime.MINUTES_PER_DAY;
 import static dev.jasonhk.minecraft.time.RealTime.MINUTES_PER_HOUR;
 import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_DAY;
 import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_HOUR;
+import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_MICRO;
+import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_MILLI;
 import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_MINUTE;
 import static dev.jasonhk.minecraft.time.RealTime.NANOS_PER_SECOND;
 import static dev.jasonhk.minecraft.time.RealTime.SECONDS_PER_DAY;
