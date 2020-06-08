@@ -133,8 +133,6 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      */
     static final int TICKS_PER_DAY = TICKS_PER_HOUR * HOURS_PER_DAY;
 
-    static final long NANOS_PER_TICKS_PER_SECOND = (long) (TICKS_PER_SECOND * NANOS_PER_SECOND);
-
     private static final long NANOS_OF_HOUR_OFFSET = HOUR_OFFSET * NANOS_PER_HOUR;
     //</editor-fold>
 
