@@ -16,7 +16,7 @@ public final class GameTime
     /**
      * Minutes per day.
      */
-    public static final int MINUTES_PER_DAY = 20;
+    public static final int MINUTES_PER_GAME_DAY = 20;
 
     /**
      * Ticks per second.

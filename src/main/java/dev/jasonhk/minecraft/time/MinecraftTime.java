@@ -116,7 +116,7 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
      * Seconds per tick.
      */
     static final double SECONDS_PER_TICK
-            = (double) RealTime.MINUTES_PER_DAY / GameTime.MINUTES_PER_DAY /
+            = (double) RealTime.MINUTES_PER_DAY / GameTime.MINUTES_PER_GAME_DAY /
               GameTime.TICKS_PER_SECOND;
 
     /**
