@@ -50,6 +50,28 @@ public class MinecraftTimeTest
             }
 
             @Nested
+            class ofSecondOfDay extends ofSecondOfDay_Base
+            {
+                @ParameterizedTest(name = "when the second-of-day value is {0}")
+                @MethodSource
+                void should_return_an_instance_of_MinecraftTime(
+                        final int secondOfDay,
+                        final int tickOfDay)
+                {
+                    MinecraftTimeAssert.assertThat(MinecraftTime.ofSecondOfDay(secondOfDay))
+                                       .hasTickOfDay(tickOfDay);
+                }
+
+                @ParameterizedTest(name = "when the second-of-day value is {0}")
+                @MethodSource
+                void should_throw_a_DateTimeException_when_the_range_was_invalid(final int secondOfDay)
+                {
+                    assertThatThrownBy(() -> { MinecraftTime.ofSecondOfDay(secondOfDay); })
+                            .isInstanceOf(DateTimeException.class);
+                }
+            }
+
+            @Nested
             class ofTickOfDay extends ofTickOfDay_Base
             {
                 @ParameterizedTest(name = "when the tick-of-day value is {0}")
@@ -178,6 +200,24 @@ public class MinecraftTimeTest
                     return Stream.of(
                             Arguments.of(-1L),
                             Arguments.of(86_400_000_000_000L));
+                }
+            }
+
+            static class ofSecondOfDay_Base
+            {
+                static Stream<Arguments> should_return_an_instance_of_MinecraftTime()
+                {
+                    return Stream.of(Arguments.of(0, 18_000),
+                                     Arguments.of(21_599, 23_999),
+                                     Arguments.of(21_600, 0),
+                                     Arguments.of(86_399, 17_999));
+                }
+
+                static Stream<Arguments> should_throw_a_DateTimeException_when_the_range_was_invalid()
+                {
+                    return Stream.of(
+                            Arguments.of(-1),
+                            Arguments.of(86_400));
                 }
             }
 
