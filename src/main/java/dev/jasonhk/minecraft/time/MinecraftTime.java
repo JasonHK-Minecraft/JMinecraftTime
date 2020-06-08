@@ -363,7 +363,9 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     @Override
     public boolean isSupported(final TemporalField field)
     {
-        return false;
+        return ((field instanceof ChronoField) || (field instanceof MinecraftField))
+               ? field.isTimeBased()
+               : ((field != null) && field.isSupportedBy(this));
     }
 
     /**
@@ -510,7 +512,9 @@ public final class MinecraftTime implements Temporal, TemporalAdjuster
     @Override
     public boolean isSupported(final TemporalUnit unit)
     {
-        return false;
+        return ((unit instanceof ChronoUnit) || (unit instanceof MinecraftUnit))
+               ? unit.isTimeBased()
+               : ((unit != null) && unit.isSupportedBy(this));
     }
 
     /**
