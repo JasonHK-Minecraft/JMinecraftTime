@@ -10,6 +10,7 @@ import static dev.jasonhk.minecraft.time.MinecraftTimeAssert.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -29,6 +30,17 @@ public class MinecraftTimeTest
         @Nested
         class Time_Creator extends Time_Creators_Base
         {
+            @Nested
+            class now
+            {
+                @Test
+                void should_return_an_instance_of_MinecraftTime_from_the_current_time()
+                {
+                    assertThat(MinecraftTime.now())
+                            .isMinecraftTime();
+                }
+            }
+
             @Nested
             class of extends of_Base
             {
