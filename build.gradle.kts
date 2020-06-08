@@ -13,8 +13,10 @@ allprojects {
 }
 
 plugins {
+    java
+    jacoco
+
     id("io.freefair.lombok") version "5.1.0"
-    id("java")
 }
 
 dependencies {
@@ -32,4 +34,9 @@ tasks.test {
     testLogging {
         events(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
     }
+}
+
+tasks.register("testCoverage") {
+    dependsOn(tasks.test)
+    finalizedBy(tasks.jacocoTestReport)
 }
